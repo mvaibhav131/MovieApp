@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+      
+        *{
+            font-family: sans-serif;
+            background-image: url("https://media.istockphoto.com/photos/round-podium-with-pink-and-green-lights-background-picture-id1314248856?b=1&k=20&m=1314248856&s=170667a&w=0&h=SG5abl4PL_UtXUZr48DHPCOxEPzw-NaafZ05AZfHrfQ=");
+            background-size: cover;
+            background-repeat: no-repeat;
+           background-attachment:fixed;
+        }
+        #query{
+            width:500px;
+            height:30px;
+            border-radius: 25px;
+            color:blue;
+            text-align: center;
+            margin:center;
+            font-size: 22px;
+        }
+        div{
+
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        label{
+            font-size: 28px;
+            color:#b721ff;
+            
+        }
+        /* button{
+            font-size:30px;
+        display:flex;
+        width:300px;
+        background:#21d4fd;
+        background-image:linear-gradient(19deg,#21d4fd 0%,#b721ff 100%);
+        justify-content:center;
+        color:white;
+        padding:1px;
+        margin:25px auto;
+        text-align:center;
+        border-radius:25px;
+        } */
+        h1{
+            text-align: center;
+            color:red;
+        }
+        /* #form{
+            text-align: center;
+            margin-bottom: 20px;
+        } */
+        #movies{
+           display:grid;
+           grid-template-columns: repeat(3,30%);
+           margin-top: 30px;
+          
+           margin-left: center;
+           height:480px;
+           width:auto;
+           border:1px solid black;
+           overflow:scroll;
+        }
+        img{
+            width:90%;
+        }
+        P {
+            font-family: sans-serif;
+            font-size:20px;
+            color:rgba(25, 0, 255, 0.822);
+          text-align: center;
+          text-align:center;
+        }
+        image{
+            margin-left: 100px;
+        }
+
+/* #movies{
+    height:200px;
+    width:206px;
+    border:1px solid black;
+    overflow:scroll;
+} */
+
+    </style>
+</head>
+<body>
+    <h1>Search Your Favourite Movie</h1>
+    <div>
+        <label for="movie">Search Movie :</label>
+        <input oninput="debounce(main(),7000)" type="text " id ="query" placeholder="Enter your movie name">
+    </div>
+   
+    <div id="movies"></div>
+    
+</body>
+</html>
+<script>
+    let movies=document.getElementById("movies");
+
+   async function searchMovie(){
+       try{
+          let input=document.getElementById("query").value;
+          let res=await fetch(`https://www.omdbapi.com/?s=${input}&apikey=8a284514`);
+            data=await res.json();
+
+            appendmovies(data.Search)
+            console.log(data);
+
+       }
+       catch(error){
+           console.log(error);
+           let image=document.createElement("img");
+           image.src="https://cdn.vectorstock.com/i/1000x1000/87/33/blue-background-with-window-message-error-oops-vector-16718733.webp"
+            movie.append(image)
+       }
+    }
+
+function appendmovies(data){
+    movies.innerHTML=null;
+
+  
+    data.forEach(function(el){
+
+let div=document.createElement("div");
+
+let img=document.createElement("img");
+img.src=el.Poster;
+let title=document.createElement("p");
+title.innerText=el.Title;
+
+let Type=document.createElement("p");
+Type.innerText=el.Type;
+
+let Year=document.createElement("p");
+Year.innerText=el.Year;
+
+
+
+div.append(img,title,Year,Type);
+movies.append(div);
+    })
+}
+
+async function main(){
+    try{
+        let data=await searchMovie();
+        
+        if(data===undefined){
+        return false;
+    }
+    appendmovies(data);
+
+    }
+    catch(error){
+        console.log(error)
+        let image=document.createElement("img");
+           image.src="https://cdn.vectorstock.com/i/1000x1000/87/33/blue-background-with-window-message-error-oops-vector-16718733.webp"
+            movie.append(image)
+    }
+}
+
+function debounce(func,delay){
+    
+    if(timerid){
+        clearTimeout(timerid);
+    }
+
+let timerid=setTimeout(function(){
+    func();
+},delay);
+}
+
+</script>

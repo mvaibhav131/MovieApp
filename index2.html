@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie info app</title>
+    <style>
+        *{
+            background-color:#21d4fd;
+        }
+        input{
+            width:500px;
+            height:30px;
+            border-radius: 25px;
+            color:blue;
+            text-align: center;
+            font-size: 22px;
+        }
+        label{
+            font-size: 28px;
+            color:#b721ff
+        }
+        button{
+            font-size:30px;
+        display:flex;
+        width:300px;
+        background:#21d4fd;
+        background-image:linear-gradient(19deg,#21d4fd 0%,#b721ff 100%);
+        justify-content:center;
+        color:white;
+        padding:1px;
+        margin:25px auto;
+        text-align:center;
+        border-radius:25px;
+        }
+        h1{
+            text-align: center;
+            color:red;
+        }
+        #form{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #container{
+           display:grid;
+           grid-template-columns: repeat(3,30%);
+           /* grid-template-rows: (1,auto); */
+           grid-gap:20px;
+           margin-left: center;
+        }
+        img{
+            width:90%;
+        }
+        P {
+            font-family: sans-serif;
+            font-size:20px;
+            color:rgba(25, 0, 255, 0.822);
+          text-align: center;
+          text-align:center;
+        }
+        image{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Your Favourite Movie</h1>
+    <div id="form">
+        <label for="movie">Movie Name : </label>
+        <input  id="name" type="text" placeholder="Enter Movie Name">
+        <br>
+        <button onclick="submit()">Submit</button>
+    </div>
+  
+     <div id="container"></div>
+</body>
+</html>
+
+<script>
+// var apikey="8a284514"
+function submit(){
+
+
+var movie=document.getElementById("name").value;
+let container=document.getElementById("container");
+// let url=(`http://www.omdbapi.com/?s=${movie}&apikey=8a284514`);
+
+var Data;
+async function getdata(){
+    try{
+        container.innerHTML=null;
+    let res=await fetch(`https://www.omdbapi.com/?s=${movie}&apikey=8a284514`);
+    data= await res.json();
+     Data=data.Search; 
+    appendproduct(Data);
+
+    console.log (Data);
+
+    }
+  catch(error){
+      console.log(error);
+      let image=document.createElement("img");
+      image.src="https://cdn.vectorstock.com/i/1000x1000/87/33/blue-background-with-window-message-error-oops-vector-16718733.webp"
+      container.append(image)
+    }
+}
+getdata()
+
+// let url="https://fakestoreapi.com/products"
+
+// let mypromise=fetch(`https://www.omdbapi.com/?s=${movie}&apikey=8a284514`);
+// var Data;
+
+// mypromise.then(function(response){
+    
+//     return response.json();
+  
+// })
+// .then(function(response){
+//     container.innerHTML=null;
+//     Data=response.Search
+//     appendproduct(Data);
+//      console.log(Data)
+// });
+// mypromise.catch(function(error){
+//     console.log(error)
+// })
+
+
+
+
+function appendproduct(Data){
+    Data.forEach(function(el){
+      
+
+        let div=document.createElement("div");
+
+        let img=document.createElement("img");
+        img.src=el.Poster;
+        let title=document.createElement("p");
+        title.innerText=el.Title;
+
+        let Type=document.createElement("p");
+        Type.innerText=el.Type;
+
+        let Year=document.createElement("p");
+        Year.innerText=el.Year;
+
+        
+
+        div.append(img,title,Year,Type);
+        container.append(div);
+    });
+   
+}
+
+}
+
+</script>
