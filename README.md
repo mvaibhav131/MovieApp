@@ -8,7 +8,7 @@ Search your favourite movie
 
 ## then its showing the that related movie data.
 
-## Visit the Movie App [(https://vaibhav-movie-app.netlify.app/)]
+## [Visit the Movie App ](https://vaibhav-movie-app.netlify.app/)
 
 
 ##  [Visit the Code](https://github.com/mvaibhav131/MovieApp)
