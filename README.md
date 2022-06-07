@@ -11,10 +11,10 @@ Search your favourite movie
 ## Visit the Movie App [(https://vaibhav-movie-app.netlify.app/)]
 
 
-## Visit the Code [(https://github.com/mvaibhav131/MovieApp)]
+##  [Visit the Code](https://github.com/mvaibhav131/MovieApp)
 
 
 ##You can see the some app image here
 
-![(https://user-images.githubusercontent.com/98808183/172421255-287465f8-4702-4780-a307-827412626f73.png)]
+![ see the app image](https://user-images.githubusercontent.com/98808183/172421255-287465f8-4702-4780-a307-827412626f73.png)
 
